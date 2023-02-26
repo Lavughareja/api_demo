@@ -6,9 +6,10 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-
+        width: 200,
       child: ListView(
         padding: EdgeInsets.zero,
+
         children: [
           UserAccountsDrawerHeader(
             accountName: Text('Lav Ughareja'),

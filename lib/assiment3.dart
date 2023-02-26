@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:my_first_app/assiment.dart';
-import 'package:my_first_app/assiment2.dart';
+
+import 'assiment2.dart';
 
 class Assiment3 extends StatefulWidget {
-  const Assiment3 ({Key? key}) : super(key: key);
+  String im='',nm='',dt='',tm='';
+   Assiment3(this.im,this.nm,this.dt,this.tm);
 
   @override
   State<Assiment3> createState() => _Assiment3State();
@@ -24,22 +26,11 @@ class _Assiment3State extends State<Assiment3> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  'assets/image/foods.jpg',
+                Image.network(
+                  widget.im,
                   fit: BoxFit.cover,
                 ),
-                Container(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
-                  ),
-                  margin: EdgeInsets.only(bottom: 135, right: 400, left: 4),
-                ),
+
                 Container(
                   child: Text(
                     'Detail',
@@ -49,7 +40,24 @@ class _Assiment3State extends State<Assiment3> {
                         fontWeight: FontWeight.bold),
                   ),
                   margin: EdgeInsets.only(top: 13, left: 25),
-                )
+                ),
+                InkWell(
+                  onTap: () {
+                    print('hello');
+                    // Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return Assiment2();
+                    },));
+
+                  },
+                  child: Container(
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
+                    margin: EdgeInsets.only(bottom: 135, right: 400, left: 4),
+                  ),
+                ),
               ],
             ),
           ),
@@ -65,7 +73,7 @@ class _Assiment3State extends State<Assiment3> {
                         child: Container(
                           child: Text(
                             'How to make fried \n'
-                            'noodies',
+                            +widget.nm,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -74,83 +82,72 @@ class _Assiment3State extends State<Assiment3> {
                         ),
                         flex: 2,
                       ),
-                      Expanded(
-                        child: Container(
-                            child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                          splashColor: Colors.red,
-                          splashRadius: 20,
-                        )),
-                      ),
+                      Container(
+                          child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                        splashColor: Colors.red,
+                        splashRadius: 20,
+                      )),
                     ]),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 40),
-                    child: Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(),
-                              child: RatingBar.builder(
-                                initialRating: 4,
-                                minRating: 1,
-                                direction: Axis.horizontal,
-                                // allowHalfRating: false,
-                                itemCount: 5,
-                                itemSize: 15,
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(),
+                          child: RatingBar.builder(
+                            initialRating: 4,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            // allowHalfRating: false,
+                            itemCount: 5,
+                            itemSize: 15,
 
-                                itemPadding:
-                                    const EdgeInsets.symmetric(horizontal: 2),
-                                itemBuilder: (context, _) => Icon(
-                                  _selectedIcon ?? Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {
-                                  // _rating = ratingvalue;
-                                  setState(() {});
-                                },
-                              ),
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 2),
+                            itemBuilder: (context, _) => Icon(
+                              _selectedIcon ?? Icons.star,
+                              color: Colors.amber,
                             ),
-                            flex: 2,
+                            onRatingUpdate: (rating) {
+                              // _rating = ratingvalue;
+                              setState(() {});
+                            },
                           ),
-                          Container(
-                            child: Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(),
-                                child: Text('4.0',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15)),
-                              ),
-                            ),
+                        ),
+                        Container(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text('4.0',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 15)),
                           ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(right: 200),
-                              child: Icon(
-                                Icons.timelapse,
-                                color: Colors.grey,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(),
-                                  child: Text(
-                                    '45 Min',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 15),
-                                  )
-                                  // Icon(Icons.timelapse,color: Colors.grey,),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 8),
 
-                                  )),
-                        ],
-                      ),
+                          child: Icon(
+                            Icons.timelapse,
+                            color: Colors.grey,
+                            size: 15,
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(left: 8),
+                            child: Text(
+                              widget.tm,
+                              style: TextStyle(
+                                  color: Colors.grey, fontSize: 15),
+                            )
+                            // Icon(Icons.timelapse,color: Colors.grey,),
+
+                            ),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -168,9 +165,7 @@ class _Assiment3State extends State<Assiment3> {
                   Expanded(
                     child: Container(
                       child: Text(
-                        'Fried Noodies are a dish that is loved by most\n'
-                        'people Decides beging practical and not too\n'
-                        'difficult to make.....',
+                        widget.dt,
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                       margin: EdgeInsets.only(top: 15),
@@ -206,23 +201,7 @@ class _Assiment3State extends State<Assiment3> {
                     ),
                   ),
                 ],
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                // children: [
-                //   Container(
-                //     child:Expanded(
-                //       child: Text(
-                //         'How to make fried \n'
-                //         'noodies',
-                //         style: TextStyle(
-                //           fontWeight: FontWeight.bold,
-                //           fontSize: 20,
-                //         ),
-                //
-                //       ),
-                //
-                //     ),
-                //   ),
-                // ],
+
               ),
             ),
           ),
